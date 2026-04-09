@@ -2131,15 +2131,21 @@
       utterance.rate = 0.9; // Slightly slower for clarity
       utterance.pitch = 1;
       utterance.volume = 1;
+      utterance.lang = 'en-US'; // Force US English
       
-      // Try to use a natural-sounding voice
+      // Get voices and find a US English voice
       const voices = window.speechSynthesis.getVoices();
-      const preferredVoice = voices.find(v => 
-        v.lang.startsWith('en') && (v.name.includes('Samantha') || v.name.includes('Google') || v.name.includes('Natural'))
-      ) || voices.find(v => v.lang.startsWith('en-US')) || voices[0];
       
-      if (preferredVoice) {
-        utterance.voice = preferredVoice;
+      // Priority order for US voices
+      const usVoice = voices.find(v => v.lang === 'en-US' && v.name.includes('Samantha')) ||
+                      voices.find(v => v.lang === 'en-US' && v.name.includes('Google US')) ||
+                      voices.find(v => v.lang === 'en-US' && v.name.includes('Microsoft Zira')) ||
+                      voices.find(v => v.lang === 'en-US' && v.name.includes('Alex')) ||
+                      voices.find(v => v.lang === 'en-US' && !v.name.includes('India') && !v.name.includes('UK') && !v.name.includes('Australia')) ||
+                      voices.find(v => v.lang === 'en-US');
+      
+      if (usVoice) {
+        utterance.voice = usVoice;
       }
       
       // Visual feedback - find any active speak button
