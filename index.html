@@ -242,6 +242,57 @@
       font-size: 1.5rem;
     }
 
+    .subject-icon .emoji {
+      display: inline-block;
+      font-size: 1.5rem;
+    }
+
+    /* Reading - book flipping */
+    .subject-card.reading .emoji {
+      animation: bookFlip 2s ease-in-out infinite;
+    }
+
+    @keyframes bookFlip {
+      0%, 100% { transform: rotateY(0deg); }
+      25% { transform: rotateY(-20deg); }
+      50% { transform: rotateY(0deg); }
+      75% { transform: rotateY(20deg); }
+    }
+
+    /* Math - numbers bouncing */
+    .subject-card.math .emoji {
+      animation: mathBounce 1.5s ease-in-out infinite;
+    }
+
+    @keyframes mathBounce {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-5px) scale(1.1); }
+    }
+
+    /* Fun Facts - star sparkling */
+    .subject-card.funfacts .emoji {
+      animation: starSparkle 2s ease-in-out infinite;
+    }
+
+    @keyframes starSparkle {
+      0%, 100% { transform: scale(1) rotate(0deg); filter: brightness(1); }
+      25% { transform: scale(1.15) rotate(10deg); filter: brightness(1.3); }
+      50% { transform: scale(1) rotate(0deg); filter: brightness(1); }
+      75% { transform: scale(1.15) rotate(-10deg); filter: brightness(1.3); }
+    }
+
+    /* Vocabulary - pencil writing */
+    .subject-card.vocabulary .emoji {
+      animation: pencilWrite 1.8s ease-in-out infinite;
+    }
+
+    @keyframes pencilWrite {
+      0%, 100% { transform: rotate(0deg) translateX(0); }
+      25% { transform: rotate(-10deg) translateX(-2px); }
+      50% { transform: rotate(5deg) translateX(2px); }
+      75% { transform: rotate(-5deg) translateX(-1px); }
+    }
+
     .subject-card.reading .subject-icon { background: linear-gradient(135deg, #FFE4EC, #FFD0DF); }
     .subject-card.math .subject-icon { background: linear-gradient(135deg, #E3F6F5, #C8F0ED); }
     .subject-card.funfacts .subject-icon { background: linear-gradient(135deg, #FFF9E6, #FFF0B3); }
@@ -985,6 +1036,90 @@
       color: var(--lilac-dark);
     }
 
+    .math-input-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .number-pad {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.5rem;
+      max-width: 280px;
+      margin: 0 auto;
+    }
+
+    .num-btn {
+      background: linear-gradient(135deg, #F8F6FF 0%, #F0EBFF 100%);
+      border: 2px solid var(--lilac-light);
+      border-radius: 12px;
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.5rem;
+      color: var(--text);
+      padding: 1rem;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      min-width: 70px;
+      min-height: 60px;
+    }
+
+    .num-btn:hover {
+      background: var(--lilac-light);
+      transform: scale(1.05);
+    }
+
+    .num-btn:active {
+      transform: scale(0.95);
+      background: var(--lilac);
+      color: white;
+    }
+
+    .num-btn.wide {
+      grid-column: span 2;
+    }
+
+    .num-btn.clear {
+      background: linear-gradient(135deg, #FFE4E4 0%, #FFD0D0 100%);
+      border-color: var(--coral);
+      color: var(--coral);
+    }
+
+    .num-btn.clear:hover {
+      background: var(--coral);
+      color: white;
+    }
+
+    .num-btn.negative {
+      background: linear-gradient(135deg, #E3F6F5 0%, #C8F0ED 100%);
+      border-color: var(--mint);
+      color: #2A9D8F;
+    }
+
+    .num-btn.negative:hover {
+      background: var(--mint);
+      color: white;
+    }
+
+    .math-display {
+      width: 100%;
+      max-width: 280px;
+      padding: 1rem;
+      font-size: 2rem;
+      font-family: 'Fredoka', sans-serif;
+      text-align: center;
+      background: white;
+      border: 2px solid var(--lilac-light);
+      border-radius: 12px;
+      color: var(--text);
+      min-height: 60px;
+    }
+
+    .math-display.empty {
+      color: var(--text-light);
+    }
+
     .math-problem-container {
       display: flex;
       align-items: center;
@@ -1224,7 +1359,7 @@
       <div class="subjects-grid">
         <div class="subject-card reading" onclick="startSubject('reading')">
           <div class="subject-header">
-            <div class="subject-icon">📖</div>
+            <div class="subject-icon"><span class="emoji">📖</span></div>
             <div class="subject-title">Reading</div>
           </div>
           <p style="color: var(--text-light); font-size: 0.9rem;">Stories and comprehension</p>
@@ -1241,7 +1376,7 @@
 
         <div class="subject-card math" onclick="startSubject('math')">
           <div class="subject-header">
-            <div class="subject-icon">🔢</div>
+            <div class="subject-icon"><span class="emoji">🔢</span></div>
             <div class="subject-title">Math</div>
           </div>
           <p style="color: var(--text-light); font-size: 0.9rem;">Numbers and problem solving</p>
@@ -1258,7 +1393,7 @@
 
         <div class="subject-card funfacts" onclick="startSubject('funfacts')">
           <div class="subject-header">
-            <div class="subject-icon">🌟</div>
+            <div class="subject-icon"><span class="emoji">🌟</span></div>
             <div class="subject-title">Fun Facts</div>
           </div>
           <p style="color: var(--text-light); font-size: 0.9rem;">Amazing things to discover</p>
@@ -1275,7 +1410,7 @@
 
         <div class="subject-card vocabulary" onclick="startSubject('vocabulary')">
           <div class="subject-header">
-            <div class="subject-icon">📝</div>
+            <div class="subject-icon"><span class="emoji">📝</span></div>
             <div class="subject-title">Vocabulary</div>
           </div>
           <p style="color: var(--text-light); font-size: 0.9rem;">New words to explore</p>
@@ -1581,6 +1716,9 @@
       const container = document.getElementById('questionContainer');
       let questions, q;
 
+      // Reset math answer for number pad
+      mathAnswer = '';
+
       switch (currentSubject) {
         case 'reading':
           questions = readingQuestions;
@@ -1660,7 +1798,23 @@
               </svg>
             </button>
           </div>
-          <input type="number" class="math-input" id="mathAnswer" placeholder="Your answer" onkeyup="enableMathSubmit()" onkeydown="if(event.key==='Enter')submitMathAnswer(${q.answer})">
+          <div class="math-input-container">
+            <div class="math-display empty" id="mathDisplay">Tap to answer</div>
+            <div class="number-pad">
+              <button class="num-btn" onclick="numPadInput('1')">1</button>
+              <button class="num-btn" onclick="numPadInput('2')">2</button>
+              <button class="num-btn" onclick="numPadInput('3')">3</button>
+              <button class="num-btn" onclick="numPadInput('4')">4</button>
+              <button class="num-btn" onclick="numPadInput('5')">5</button>
+              <button class="num-btn" onclick="numPadInput('6')">6</button>
+              <button class="num-btn" onclick="numPadInput('7')">7</button>
+              <button class="num-btn" onclick="numPadInput('8')">8</button>
+              <button class="num-btn" onclick="numPadInput('9')">9</button>
+              <button class="num-btn negative" onclick="numPadInput('-')">−</button>
+              <button class="num-btn" onclick="numPadInput('0')">0</button>
+              <button class="num-btn clear" onclick="numPadClear()">⌫</button>
+            </div>
+          </div>
           <button class="submit-btn" id="mathSubmitBtn" onclick="submitMathAnswer(${q.answer})" disabled>Check Answer</button>
           <div id="feedback"></div>
         </div>
@@ -1698,6 +1852,7 @@
     }
 
     function renderVocabQuestion(q, num) {
+      const speechText = q.word + ". The definition is: " + q.definition;
       return `
         <div class="question-card">
           <div class="question-header">
@@ -1708,7 +1863,7 @@
             <span class="fun-fact-label" style="background: var(--lilac);">📖 New Word</span>
             <div class="word-with-speak">
               <span style="font-family: 'Fredoka', sans-serif; font-size: 1.5rem; color: var(--lilac-dark);">${q.word}</span>
-              <button class="speak-btn" onclick="speakWord('${q.word}')" title="Hear the word">
+              <button class="speak-btn" onclick="speakVocab('${q.word}', '${q.definition.replace(/'/g, "\\'")}')" title="Hear the word">
                 <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
                 </svg>
@@ -1739,8 +1894,55 @@
     }
 
     function enableMathSubmit() {
-      const val = document.getElementById('mathAnswer').value;
-      document.getElementById('mathSubmitBtn').disabled = val === '';
+      const display = document.getElementById('mathDisplay');
+      const val = display.textContent;
+      document.getElementById('mathSubmitBtn').disabled = val === 'Tap to answer' || val === '' || val === '-';
+    }
+
+    // Number pad functions
+    let mathAnswer = '';
+
+    function numPadInput(digit) {
+      if (questionAnswered) return;
+      
+      // Handle negative sign
+      if (digit === '-') {
+        if (mathAnswer === '') {
+          mathAnswer = '-';
+        } else if (mathAnswer === '-') {
+          mathAnswer = '';
+        }
+      } else {
+        // Limit to reasonable length
+        if (mathAnswer.replace('-', '').length < 6) {
+          mathAnswer += digit;
+        }
+      }
+      
+      updateMathDisplay();
+      enableMathSubmit();
+    }
+
+    function numPadClear() {
+      if (questionAnswered) return;
+      
+      if (mathAnswer.length > 0) {
+        mathAnswer = mathAnswer.slice(0, -1);
+      }
+      
+      updateMathDisplay();
+      enableMathSubmit();
+    }
+
+    function updateMathDisplay() {
+      const display = document.getElementById('mathDisplay');
+      if (mathAnswer === '' || mathAnswer === undefined) {
+        display.textContent = 'Tap to answer';
+        display.classList.add('empty');
+      } else {
+        display.textContent = mathAnswer;
+        display.classList.remove('empty');
+      }
     }
 
     function submitAnswer(correctIndex) {
@@ -1763,17 +1965,22 @@
     function submitMathAnswer(correctAnswer) {
       if (questionAnswered) return;
       
-      const userAnswer = parseInt(document.getElementById('mathAnswer').value);
+      const userAnswer = parseInt(mathAnswer);
       if (isNaN(userAnswer)) return;
       
       questionAnswered = true;
       const isCorrect = userAnswer === correctAnswer;
       processAnswer(isCorrect);
 
-      const input = document.getElementById('mathAnswer');
-      input.disabled = true;
-      input.style.borderColor = isCorrect ? 'var(--success)' : 'var(--coral)';
-      input.style.background = isCorrect ? '#D4EDDA' : '#FFE4E4';
+      // Disable number pad
+      document.querySelectorAll('.num-btn').forEach(btn => {
+        btn.style.pointerEvents = 'none';
+        btn.style.opacity = '0.5';
+      });
+
+      const display = document.getElementById('mathDisplay');
+      display.style.borderColor = isCorrect ? 'var(--success)' : 'var(--coral)';
+      display.style.background = isCorrect ? '#D4EDDA' : '#FFE4E4';
 
       showFeedback(isCorrect, correctAnswer);
     }
@@ -1948,6 +2155,12 @@
       }
       
       window.speechSynthesis.speak(utterance);
+    }
+
+    // Special function for vocabulary - says word then definition
+    function speakVocab(word, definition) {
+      const fullText = word + ". The definition is: " + definition;
+      speakText(fullText);
     }
 
     // Alias for vocabulary section
