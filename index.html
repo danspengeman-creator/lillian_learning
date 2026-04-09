@@ -971,6 +971,93 @@
       }
     }
 
+    .passage-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.75rem;
+    }
+
+    .passage-label {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 0.9rem;
+      color: var(--lilac-dark);
+    }
+
+    .math-problem-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .math-problem {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 2.5rem;
+      text-align: center;
+      color: var(--text);
+      margin-bottom: 0;
+    }
+
+    /* Speak button */
+    .speak-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--lilac-light);
+      border: none;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-left: 0.5rem;
+      vertical-align: middle;
+    }
+
+    .speak-btn:hover {
+      background: var(--lilac);
+      transform: scale(1.1);
+    }
+
+    .speak-btn:active {
+      transform: scale(0.95);
+    }
+
+    .speak-btn svg {
+      width: 22px;
+      height: 22px;
+      fill: var(--lilac-dark);
+      transition: fill 0.3s ease;
+    }
+
+    .speak-btn:hover svg {
+      fill: white;
+    }
+
+    .speak-btn.speaking {
+      background: var(--lilac);
+      animation: pulse 1s ease-in-out infinite;
+    }
+
+    .speak-btn.speaking svg {
+      fill: white;
+    }
+
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(155, 126, 222, 0.4); }
+      50% { box-shadow: 0 0 0 10px rgba(155, 126, 222, 0); }
+    }
+
+    .word-with-speak {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+
     /* Math input styling */
     .math-input {
       width: 100%;
@@ -989,13 +1076,6 @@
       box-shadow: 0 0 0 4px rgba(155, 126, 222, 0.1);
     }
 
-    .math-problem {
-      font-family: 'Fredoka', sans-serif;
-      font-size: 2.5rem;
-      text-align: center;
-      margin-bottom: 1.5rem;
-      color: var(--text);
-    }
   </style>
 </head>
 <body>
@@ -1534,7 +1614,17 @@
             <span class="question-number">Question ${num}</span>
             <span class="question-points">+10 ⭐</span>
           </div>
-          <div class="passage">${q.passage}</div>
+          <div class="passage">
+            <div class="passage-header">
+              <span class="passage-label">📖 Read the story</span>
+              <button class="speak-btn" onclick="speakText(\`${q.passage.replace(/`/g, "'")}\`)" title="Listen to the story">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+                </svg>
+              </button>
+            </div>
+            ${q.passage}
+          </div>
           <div class="question-text">${q.question}</div>
           <div class="answers-grid">
             ${q.answers.map((a, i) => `
@@ -1548,13 +1638,27 @@
     }
 
     function renderMathQuestion(q, num) {
+      // Convert math symbols to speakable text
+      const speakableProblem = q.problem
+        .replace('×', ' times ')
+        .replace('÷', ' divided by ')
+        .replace('+', ' plus ')
+        .replace('-', ' minus ');
+      
       return `
         <div class="question-card">
           <div class="question-header">
             <span class="question-number">Problem ${num}</span>
             <span class="question-points">+10 ⭐</span>
           </div>
-          <div class="math-problem">${q.problem} = ?</div>
+          <div class="math-problem-container">
+            <div class="math-problem">${q.problem} = ?</div>
+            <button class="speak-btn" onclick="speakText('What is ${speakableProblem}?')" title="Hear the problem">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+              </svg>
+            </button>
+          </div>
           <input type="number" class="math-input" id="mathAnswer" placeholder="Your answer" onkeyup="enableMathSubmit()" onkeydown="if(event.key==='Enter')submitMathAnswer(${q.answer})">
           <button class="submit-btn" id="mathSubmitBtn" onclick="submitMathAnswer(${q.answer})" disabled>Check Answer</button>
           <div id="feedback"></div>
@@ -1570,7 +1674,14 @@
             <span class="question-points">+10 ⭐</span>
           </div>
           <div class="fun-fact-display">
-            <span class="fun-fact-label">✨ Did You Know?</span>
+            <div class="passage-header">
+              <span class="fun-fact-label">✨ Did You Know?</span>
+              <button class="speak-btn" onclick="speakText(\`${q.fact.replace(/`/g, "'")}\`)" title="Hear the fun fact">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+                </svg>
+              </button>
+            </div>
             <div class="fun-fact-text">${q.fact}</div>
           </div>
           <div class="question-text">${q.question}</div>
@@ -1594,7 +1705,14 @@
           </div>
           <div class="fun-fact-display" style="border-color: var(--lilac);">
             <span class="fun-fact-label" style="background: var(--lilac);">📖 New Word</span>
-            <div style="font-family: 'Fredoka', sans-serif; font-size: 1.5rem; color: var(--lilac-dark); margin-bottom: 0.5rem;">${q.word}</div>
+            <div class="word-with-speak">
+              <span style="font-family: 'Fredoka', sans-serif; font-size: 1.5rem; color: var(--lilac-dark);">${q.word}</span>
+              <button class="speak-btn" onclick="speakWord('${q.word}')" title="Hear the word">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+                </svg>
+              </button>
+            </div>
             <div class="fun-fact-text">${q.definition}</div>
           </div>
           <div class="question-text">Fill in the blank: ${q.sentence}</div>
@@ -1795,6 +1913,51 @@
         setTimeout(() => confetti.remove(), 2000);
       }
     }
+
+    // ==================== TEXT TO SPEECH ====================
+    function speakText(text) {
+      // Cancel any ongoing speech
+      window.speechSynthesis.cancel();
+      
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.rate = 0.9; // Slightly slower for clarity
+      utterance.pitch = 1;
+      utterance.volume = 1;
+      
+      // Try to use a natural-sounding voice
+      const voices = window.speechSynthesis.getVoices();
+      const preferredVoice = voices.find(v => 
+        v.lang.startsWith('en') && (v.name.includes('Samantha') || v.name.includes('Google') || v.name.includes('Natural'))
+      ) || voices.find(v => v.lang.startsWith('en-US')) || voices[0];
+      
+      if (preferredVoice) {
+        utterance.voice = preferredVoice;
+      }
+      
+      // Visual feedback - find any active speak button
+      const btns = document.querySelectorAll('.speak-btn');
+      btns.forEach(btn => btn.classList.remove('speaking'));
+      
+      // Find the button that was clicked (the one in the current view)
+      const activeBtn = event && event.currentTarget ? event.currentTarget : btns[0];
+      if (activeBtn) {
+        activeBtn.classList.add('speaking');
+        utterance.onend = () => activeBtn.classList.remove('speaking');
+        utterance.onerror = () => activeBtn.classList.remove('speaking');
+      }
+      
+      window.speechSynthesis.speak(utterance);
+    }
+
+    // Alias for vocabulary section
+    function speakWord(word) {
+      speakText(word);
+    }
+
+    // Preload voices (some browsers need this)
+    window.speechSynthesis.onvoiceschanged = () => {
+      window.speechSynthesis.getVoices();
+    };
 
     // ==================== PARENT DASHBOARD ====================
     function openParentDashboard() {
