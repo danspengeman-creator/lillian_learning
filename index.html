@@ -1616,120 +1616,499 @@
   <script>
     // ==================== DATA ====================
     const readingQuestions = [
+      // Harry Potter themed passages
       {
-        passage: "Maya loved visiting her grandmother's garden. Every Saturday morning, she would help water the flowers and pull out weeds. Her favorite part was picking the ripe tomatoes. Grandmother always said the secret to a good garden was patience and love.",
-        question: "What was Maya's favorite part about visiting the garden?",
-        answers: ["Watering the flowers", "Pulling out weeds", "Picking ripe tomatoes", "Planting seeds"],
-        correct: 2
-      },
-      {
-        passage: "The little penguin waddled across the ice. He was looking for his mother. The wind was cold but his fluffy feathers kept him warm. Finally, he heard a familiar call and hurried toward it.",
-        question: "What kept the penguin warm in the cold wind?",
-        answers: ["A blanket", "His fluffy feathers", "His mother", "The sun"],
+        passage: "Luna carefully arranged her paintbrushes by color. Today she was painting a portrait of her owl, Stardust. She mixed blue and white to create the perfect shade for the feathers. The owl hooted softly, as if approving of her work.",
+        question: "What was Luna painting a portrait of?",
+        answers: ["Her cat", "Her owl", "Her dog", "Her rabbit"],
         correct: 1
       },
       {
-        passage: "Emma found an old treasure map in the attic. The paper was yellow and crinkly. There was a big red X near a drawing of an oak tree. She couldn't wait to explore the backyard!",
-        question: "Where did Emma find the treasure map?",
-        answers: ["In the backyard", "Under her bed", "In the attic", "In the basement"],
+        passage: "The young wizard opened his spell book nervously. His first lesson was to make a feather float. He waved his wand and said the magic words carefully. To his amazement, the feather rose three feet into the air!",
+        question: "What was the young wizard trying to make float?",
+        answers: ["A book", "A cup", "A feather", "A hat"],
         correct: 2
       },
       {
-        passage: "Chef Marco stirred the soup slowly. He added a pinch of salt and some fresh herbs from his garden. The kitchen smelled wonderful. His cat Whiskers sat by the door, hoping for a taste.",
-        question: "Where did Chef Marco get the herbs for his soup?",
-        answers: ["From the store", "From his garden", "From a friend", "From a box"],
+        passage: "Mia discovered a hidden room behind the library bookshelf. Inside were dusty paintings that seemed to whisper secrets. One portrait showed a witch holding a golden key. Mia wondered what the key might unlock.",
+        question: "What was the witch in the portrait holding?",
+        answers: ["A wand", "A book", "A golden key", "A crystal ball"],
+        correct: 2
+      },
+      {
+        passage: "The artist mixed red and yellow paint together on her palette. She was creating a painting of a phoenix rising from flames. The orange color she made was perfect for the magical bird's feathers.",
+        question: "What two colors did the artist mix together?",
+        answers: ["Blue and green", "Red and yellow", "Purple and white", "Black and red"],
         correct: 1
       },
       {
-        passage: "The library was quiet except for the gentle hum of the air conditioner. Sarah found her favorite reading spot by the big window. She opened her book about dragons and was soon lost in another world.",
-        question: "What was Sarah's book about?",
-        answers: ["Cats", "Space", "Dragons", "The ocean"],
+        passage: "In the enchanted greenhouse, plants could sing and dance. Professor Bloom taught her students how to care for the magical flowers. The most important rule was to always speak kindly to the plants.",
+        question: "What was Professor Bloom's most important rule?",
+        answers: ["Water them daily", "Give them sunlight", "Speak kindly to them", "Keep them in shade"],
         correct: 2
       },
       {
-        passage: "During recess, the children played a game of tag. Leo was the fastest runner in his class. He dodged left and right, but finally Maria tagged him near the swings. Everyone laughed and cheered.",
-        question: "Where was Leo when Maria tagged him?",
-        answers: ["Near the slide", "Near the swings", "By the fence", "In the sandbox"],
+        passage: "Oliver found a quill that wrote by itself. When he thought of a story, the quill would write it down perfectly. He spent hours creating tales of brave knights and clever dragons.",
+        question: "What made the quill special?",
+        answers: ["It was golden", "It wrote by itself", "It never ran out of ink", "It was very old"],
         correct: 1
       },
       {
-        passage: "Aunt Clara baked the best chocolate chip cookies in town. She always added a secret ingredient - a tiny bit of cinnamon. The cookies were soft in the middle and crispy on the edges.",
-        question: "What was Aunt Clara's secret ingredient?",
-        answers: ["Vanilla", "Brown sugar", "Cinnamon", "Honey"],
+        passage: "The castle's moving staircases confused many new students. They would shift and change direction without warning. Sophia learned to count to three before stepping on, just to be safe.",
+        question: "Why did Sophia count to three?",
+        answers: ["To remember spells", "To be safe before stepping on", "To call her friends", "To open doors"],
+        correct: 1
+      },
+      {
+        passage: "Emma sketched magical creatures in her journal every day. Her favorite was the hippogriff, with its eagle head and horse body. She used her colored pencils to make the feathers shimmer with purple and gold.",
+        question: "What was Emma's favorite creature to draw?",
+        answers: ["A dragon", "A unicorn", "A hippogriff", "A phoenix"],
         correct: 2
       },
       {
-        passage: "The spaceship landed softly on the purple moon. Captain Zara stepped out and looked around. The ground sparkled like glitter. She took a sample to bring back to Earth.",
-        question: "What did the ground on the purple moon look like?",
-        answers: ["Like rocks", "Like sand", "Like water", "Like glitter"],
-        correct: 3
+        passage: "The potions classroom smelled of herbs and mystery. Today's lesson was brewing a color-changing potion. When done correctly, it would turn from green to pink to sparkling silver.",
+        question: "What was the final color the potion should turn?",
+        answers: ["Green", "Pink", "Sparkling silver", "Blue"],
+        correct: 2
+      },
+      {
+        passage: "Young artists at the magic school could make their paintings come alive. Sophie painted a butterfly that actually flew off the canvas. Her teacher gave her ten points for creativity.",
+        question: "What did Sophie paint that came alive?",
+        answers: ["A bird", "A butterfly", "A flower", "A dragon"],
+        correct: 1
+      },
+      {
+        passage: "The Sorting Hat was very old and very wise. It could look into a student's mind and see their true qualities. It always knew which house would help each student grow the most.",
+        question: "What could the Sorting Hat see?",
+        answers: ["The future", "A student's true qualities", "Hidden treasure", "Secret passages"],
+        correct: 1
+      },
+      {
+        passage: "Lily wrote stories about a girl who discovered she had magic powers. Each chapter brought new adventures in a world of castles and dragons. Her little brother always begged her to read the next part.",
+        question: "Who always wanted to hear Lily's stories?",
+        answers: ["Her mother", "Her teacher", "Her little brother", "Her best friend"],
+        correct: 2
+      },
+      {
+        passage: "The owls delivered mail every morning at breakfast. They swooped down from the ceiling carrying letters and packages. One snowy owl always brought treats from home for its wizard.",
+        question: "When did the owls deliver mail?",
+        answers: ["At lunch", "At dinner", "Every morning at breakfast", "At midnight"],
+        correct: 2
+      },
+      {
+        passage: "Clara designed her own book covers using watercolors. She painted a tower under a starry sky for her latest story. The moon in her painting seemed to glow with real silver light.",
+        question: "What art supplies did Clara use for her book covers?",
+        answers: ["Crayons", "Markers", "Watercolors", "Chalk"],
+        correct: 2
+      },
+      {
+        passage: "The Room of Requirement appeared only when someone truly needed it. If you needed a place to practice spells, it became a training room. If you needed art supplies, paintbrushes would appear on the shelves.",
+        question: "What would appear if you needed art supplies?",
+        answers: ["Books", "Food", "Paintbrushes", "Wands"],
+        correct: 2
+      },
+      {
+        passage: "Marcus illustrated a map of his imaginary kingdom. He drew mountains in the north and a sparkling sea in the south. His favorite part was adding a castle with seventeen towers.",
+        question: "How many towers did Marcus draw on the castle?",
+        answers: ["Seven", "Twelve", "Seventeen", "Twenty"],
+        correct: 2
+      },
+      {
+        passage: "Chocolate frogs were a favorite wizard treat. Each one came with a collectible card showing a famous witch or wizard. The frogs could actually hop, so you had to catch them quickly!",
+        question: "What came with each chocolate frog?",
+        answers: ["A spell book", "A collectible card", "A tiny wand", "A magic bean"],
+        correct: 1
+      },
+      {
+        passage: "The young illustrator practiced drawing expressions in her sketchbook. She drew happy faces and sad faces and surprised faces. Her characters seemed more real with each page she filled.",
+        question: "What was the young illustrator practicing?",
+        answers: ["Drawing animals", "Drawing expressions", "Drawing buildings", "Drawing landscapes"],
+        correct: 1
+      },
+      {
+        passage: "Invisibility cloaks were extremely rare magical items. When worn, the person underneath became completely invisible. Harry's cloak had been passed down through his family for generations.",
+        question: "What happened when someone wore an invisibility cloak?",
+        answers: ["They could fly", "They became invisible", "They could read minds", "They grew stronger"],
+        correct: 1
+      },
+      {
+        passage: "Nina created a comic strip about a witch's daily life. The witch had a grumpy cat and a cheerful broomstick. Each panel showed a new funny adventure in their cozy cottage.",
+        question: "What kind of cat did the witch in Nina's comic have?",
+        answers: ["A sleepy cat", "A grumpy cat", "A playful cat", "A tiny cat"],
+        correct: 1
+      },
+      {
+        passage: "The Great Hall's ceiling was enchanted to look like the sky outside. On sunny days it showed blue skies and fluffy clouds. On stormy nights, you could see lightning flash across it safely.",
+        question: "What was special about the Great Hall's ceiling?",
+        answers: ["It was very tall", "It looked like the sky outside", "It was painted gold", "It had many chandeliers"],
+        correct: 1
+      },
+      {
+        passage: "Jake wrote poems about mythical creatures. His latest was about a dragon who loved to read books. The dragon would curl up in caves with stories instead of hunting for treasure.",
+        question: "What did the dragon in Jake's poem love to do?",
+        answers: ["Hunt for treasure", "Read books", "Fly through storms", "Breathe fire"],
+        correct: 1
+      },
+      {
+        passage: "Broomsticks needed regular care to fly properly. Students learned to polish the handles and trim the twigs. A well-cared-for broomstick could last for many years of flying.",
+        question: "What did students need to polish on their broomsticks?",
+        answers: ["The twigs", "The handles", "The bristles", "The tip"],
+        correct: 1
+      },
+      {
+        passage: "Amelia filled her art journal with character designs. She created wizards with flowing robes and pointed hats. Each character had a unique magical specialty written below their portrait.",
+        question: "What did Amelia write below each character?",
+        answers: ["Their name", "Their age", "Their magical specialty", "Their favorite color"],
+        correct: 2
+      },
+      {
+        passage: "The library had a restricted section full of mysterious books. Some books growled if you touched them. Others had chains to keep them closed tight. Only older students could enter with permission.",
+        question: "What did some books in the restricted section do?",
+        answers: ["Floated away", "Growled if touched", "Disappeared", "Sang songs"],
+        correct: 1
+      },
+      {
+        passage: "Rosa designed costumes for the school play. She sewed silver stars onto dark blue fabric. The actors would look like they were wearing the night sky on stage.",
+        question: "What did Rosa sew onto the fabric?",
+        answers: ["Gold buttons", "Silver stars", "Red hearts", "Green leaves"],
+        correct: 1
+      },
+      {
+        passage: "Phoenixes were magical birds that could never truly die. When they grew old, they would burst into flames. From the ashes, a baby phoenix would be born again.",
+        question: "What happened when a phoenix grew old?",
+        answers: ["It flew away", "It burst into flames", "It turned invisible", "It fell asleep"],
+        correct: 1
+      },
+      {
+        passage: "Tyler created a storyboard for his adventure tale. He drew twelve panels showing a hero's journey. The last panel showed the hero returning home with a magical gem.",
+        question: "How many panels did Tyler draw?",
+        answers: ["Eight", "Ten", "Twelve", "Fifteen"],
+        correct: 2
+      },
+      {
+        passage: "Wands chose their wizards, not the other way around. Each wand had a core made from something magical, like phoenix feather or unicorn hair. The right wand would feel warm in its wizard's hand.",
+        question: "What could a wand core be made from?",
+        answers: ["Gold thread", "Phoenix feather", "Silver dust", "Dragon scales"],
+        correct: 1
+      },
+      {
+        passage: "Zoe made pop-up cards with paper engineering. Her latest creation featured a castle that rose up when you opened the card. Tiny paper knights guarded the drawbridge.",
+        question: "What guarded the drawbridge in Zoe's card?",
+        answers: ["Paper dragons", "Paper knights", "Paper wizards", "Paper horses"],
+        correct: 1
+      },
+      {
+        passage: "House elves were magical creatures who loved to help. They cooked meals and cleaned rooms with powerful magic. Dobby the house elf valued freedom more than anything.",
+        question: "What did Dobby value most?",
+        answers: ["Gold coins", "Nice clothes", "Freedom", "Magic spells"],
+        correct: 2
+      },
+      {
+        passage: "Morgan sculpted tiny dragons from clay. She painted scales in shades of green and gold. When the clay dried, her dragons looked like they might fly away.",
+        question: "What did Morgan sculpt her dragons from?",
+        answers: ["Paper", "Clay", "Wood", "Stone"],
+        correct: 1
+      },
+      {
+        passage: "The Marauder's Map showed every person and every passage in the castle. Footprints moved across the parchment in real time. The words 'I solemnly swear I am up to no good' made it appear.",
+        question: "What words made the map appear?",
+        answers: ["Open sesame", "I solemnly swear I am up to no good", "Reveal your secrets", "Show me the way"],
+        correct: 1
+      },
+      {
+        passage: "Bella crafted bookmarks with pressed flowers. She found the flowers in her grandmother's garden. Each bookmark was unique, like a tiny piece of preserved nature.",
+        question: "Where did Bella find flowers for her bookmarks?",
+        answers: ["At school", "In a shop", "In her grandmother's garden", "In the forest"],
+        correct: 2
+      },
+      {
+        passage: "Dementors were dark creatures that fed on happiness. They made everything feel cold and hopeless. The Patronus charm was the only way to drive them away.",
+        question: "What did Dementors feed on?",
+        answers: ["Food", "Magic", "Happiness", "Light"],
+        correct: 2
+      },
+      {
+        passage: "Isaac designed board games for his family. His latest creation was about exploring a magical forest. Players collected spell cards and avoided mischievous pixies.",
+        question: "What did players collect in Isaac's game?",
+        answers: ["Gold coins", "Spell cards", "Magic beans", "Treasure maps"],
+        correct: 1
+      },
+      {
+        passage: "Thestrals were invisible to most people. Only those who had witnessed something sad could see them. Despite their spooky appearance, they were gentle creatures.",
+        question: "What were Thestrals like despite their appearance?",
+        answers: ["Dangerous", "Wild", "Gentle", "Loud"],
+        correct: 2
+      },
+      {
+        passage: "Penny wrote and illustrated her own picture books. Her latest story was about a cloud who wanted to become a rainbow. She used soft pastels to color the dreamy illustrations.",
+        question: "What did the cloud in Penny's story want to become?",
+        answers: ["A star", "A rainbow", "A sun", "A moon"],
+        correct: 1
+      },
+      {
+        passage: "Quidditch was played on flying broomsticks high in the air. Each team had seven players with different roles. Catching the tiny golden Snitch ended the game.",
+        question: "How many players were on each Quidditch team?",
+        answers: ["Five", "Six", "Seven", "Eight"],
+        correct: 2
+      },
+      {
+        passage: "Quinn made shadow puppets from cardboard. She cut out shapes of dragons and castles and trees. When she held them up to a lamp, magical stories danced on the wall.",
+        question: "What material did Quinn use for her shadow puppets?",
+        answers: ["Paper", "Fabric", "Cardboard", "Plastic"],
+        correct: 2
+      },
+      {
+        passage: "The Mirror of Erised showed your deepest desires. When Harry looked into it, he saw his family. The mirror's name was 'desire' spelled backwards.",
+        question: "What did the Mirror of Erised show?",
+        answers: ["The future", "Your deepest desires", "Your memories", "Other places"],
+        correct: 1
+      },
+      {
+        passage: "Violet bound her own journals by hand. She sewed the pages together with colorful thread. The covers were decorated with stamps and stickers she collected.",
+        question: "How did Violet bind her journals?",
+        answers: ["With glue", "With tape", "By sewing pages together", "With staples"],
+        correct: 2
+      },
+      {
+        passage: "Mandrakes were magical plants that looked like small babies. Their cries could knock a person unconscious. Students wore earmuffs when repotting them in Herbology class.",
+        question: "What did students wear when handling Mandrakes?",
+        answers: ["Gloves", "Goggles", "Earmuffs", "Masks"],
+        correct: 2
+      },
+      {
+        passage: "William created flipbooks with running animations. Each page had a slightly different drawing. When flipped quickly, a wizard appeared to cast a glowing spell.",
+        question: "What happened when William's flipbook was flipped quickly?",
+        answers: ["A dragon flew", "A wizard cast a spell", "A flower bloomed", "A bird sang"],
+        correct: 1
+      },
+      {
+        passage: "Hagrid was the gamekeeper who loved dangerous creatures. He thought dragons were adorable and spiders were friendly. His hut sat at the edge of the Forbidden Forest.",
+        question: "Where was Hagrid's hut located?",
+        answers: ["In the castle", "By the lake", "At the edge of the Forbidden Forest", "In the village"],
+        correct: 2
+      },
+      {
+        passage: "Grace designed greeting cards for every occasion. She used rubber stamps and glitter and ribbon. Her birthday cards always featured hand-drawn balloons and cakes.",
+        question: "What did Grace's birthday cards always feature?",
+        answers: ["Stars and moons", "Balloons and cakes", "Flowers and butterflies", "Hearts and rainbows"],
+        correct: 1
+      },
+      {
+        passage: "Time-Turners were small golden hourglass necklaces. They allowed witches and wizards to travel back in time. Each turn took you back one hour into the past.",
+        question: "How far back did one turn of a Time-Turner take you?",
+        answers: ["One minute", "One hour", "One day", "One week"],
+        correct: 1
+      },
+      {
+        passage: "Henry photographed his artwork to share online. He learned about lighting and angles to capture the colors. Each photo showed the texture of his brushstrokes clearly.",
+        question: "What did Henry learn about to photograph his art better?",
+        answers: ["Cameras only", "Lighting and angles", "Computers", "Painting"],
+        correct: 1
+      },
+      {
+        passage: "Nifflers were small creatures that loved anything shiny. They would stuff gold and jewels into their expandable pouches. Banks never hired Nifflers for obvious reasons!",
+        question: "What did Nifflers love?",
+        answers: ["Food", "Sleep", "Anything shiny", "Water"],
+        correct: 2
+      },
+      {
+        passage: "Iris curated a gallery of her best drawings in her room. She hung them with colorful washi tape on her wall. Each month, she rotated in new pieces she was proud of.",
+        question: "How often did Iris change the drawings in her gallery?",
+        answers: ["Every week", "Every month", "Every year", "Every day"],
+        correct: 1
       }
     ];
 
     const mathQuestions = [
-      { problem: "7 + 8", answer: 15, type: "addition" },
-      { problem: "15 - 6", answer: 9, type: "subtraction" },
-      { problem: "4 × 6", answer: 24, type: "multiplication" },
-      { problem: "36 ÷ 4", answer: 9, type: "division" },
-      { problem: "23 + 19", answer: 42, type: "addition" },
-      { problem: "50 - 27", answer: 23, type: "subtraction" },
-      { problem: "7 × 8", answer: 56, type: "multiplication" },
-      { problem: "45 ÷ 5", answer: 9, type: "division" },
-      { problem: "34 + 28", answer: 62, type: "addition" },
-      { problem: "81 - 35", answer: 46, type: "subtraction" },
-      { problem: "9 × 7", answer: 63, type: "multiplication" },
+      // Addition - 13 problems
+      { problem: "14 + 9", answer: 23, type: "addition" },
+      { problem: "27 + 15", answer: 42, type: "addition" },
+      { problem: "38 + 24", answer: 62, type: "addition" },
+      { problem: "56 + 37", answer: 93, type: "addition" },
+      { problem: "45 + 28", answer: 73, type: "addition" },
+      { problem: "63 + 19", answer: 82, type: "addition" },
+      { problem: "124 + 58", answer: 182, type: "addition" },
+      { problem: "215 + 67", answer: 282, type: "addition" },
+      { problem: "189 + 43", answer: 232, type: "addition" },
+      { problem: "247 + 156", answer: 403, type: "addition" },
+      { problem: "368 + 245", answer: 613, type: "addition" },
+      { problem: "492 + 319", answer: 811, type: "addition" },
+      { problem: "567 + 284", answer: 851, type: "addition" },
+      // Subtraction - 13 problems
+      { problem: "25 - 8", answer: 17, type: "subtraction" },
+      { problem: "43 - 17", answer: 26, type: "subtraction" },
+      { problem: "62 - 25", answer: 37, type: "subtraction" },
+      { problem: "84 - 39", answer: 45, type: "subtraction" },
+      { problem: "71 - 28", answer: 43, type: "subtraction" },
+      { problem: "93 - 47", answer: 46, type: "subtraction" },
+      { problem: "100 - 36", answer: 64, type: "subtraction" },
+      { problem: "145 - 67", answer: 78, type: "subtraction" },
+      { problem: "234 - 89", answer: 145, type: "subtraction" },
+      { problem: "312 - 147", answer: 165, type: "subtraction" },
+      { problem: "500 - 263", answer: 237, type: "subtraction" },
+      { problem: "427 - 189", answer: 238, type: "subtraction" },
+      { problem: "615 - 278", answer: 337, type: "subtraction" },
+      // Multiplication - 12 problems
+      { problem: "6 × 7", answer: 42, type: "multiplication" },
+      { problem: "8 × 9", answer: 72, type: "multiplication" },
+      { problem: "7 × 7", answer: 49, type: "multiplication" },
+      { problem: "9 × 6", answer: 54, type: "multiplication" },
+      { problem: "8 × 8", answer: 64, type: "multiplication" },
+      { problem: "12 × 4", answer: 48, type: "multiplication" },
+      { problem: "11 × 7", answer: 77, type: "multiplication" },
+      { problem: "12 × 8", answer: 96, type: "multiplication" },
+      { problem: "9 × 9", answer: 81, type: "multiplication" },
+      { problem: "11 × 11", answer: 121, type: "multiplication" },
+      { problem: "12 × 12", answer: 144, type: "multiplication" },
+      { problem: "15 × 6", answer: 90, type: "multiplication" },
+      // Division - 12 problems
+      { problem: "42 ÷ 6", answer: 7, type: "division" },
+      { problem: "56 ÷ 7", answer: 8, type: "division" },
+      { problem: "63 ÷ 9", answer: 7, type: "division" },
+      { problem: "48 ÷ 8", answer: 6, type: "division" },
+      { problem: "81 ÷ 9", answer: 9, type: "division" },
       { problem: "72 ÷ 8", answer: 9, type: "division" },
-      { problem: "156 + 87", answer: 243, type: "addition" },
-      { problem: "200 - 78", answer: 122, type: "subtraction" },
-      { problem: "12 × 11", answer: 132, type: "multiplication" }
+      { problem: "96 ÷ 12", answer: 8, type: "division" },
+      { problem: "110 ÷ 11", answer: 10, type: "division" },
+      { problem: "144 ÷ 12", answer: 12, type: "division" },
+      { problem: "84 ÷ 7", answer: 12, type: "division" },
+      { problem: "108 ÷ 9", answer: 12, type: "division" },
+      { problem: "132 ÷ 11", answer: 12, type: "division" }
     ];
 
     const funFacts = [
-      { fact: "Octopuses have three hearts! Two pump blood to the gills, and one pumps it to the rest of the body.", question: "How many hearts does an octopus have?", answers: ["One", "Two", "Three", "Four"], correct: 2 },
-      { fact: "Honey never spoils! Archaeologists have found 3,000-year-old honey in Egyptian tombs that was still edible.", question: "How old was the honey found in Egyptian tombs?", answers: ["100 years", "500 years", "1,000 years", "3,000 years"], correct: 3 },
-      { fact: "A group of flamingos is called a 'flamboyance'! Flamingos are pink because of the shrimp they eat.", question: "What is a group of flamingos called?", answers: ["A flock", "A flamboyance", "A family", "A flutter"], correct: 1 },
-      { fact: "Venus is the only planet that spins clockwise! All other planets spin counter-clockwise.", question: "Which planet spins clockwise?", answers: ["Mars", "Jupiter", "Venus", "Saturn"], correct: 2 },
-      { fact: "Butterflies taste with their feet! This helps them find food when they land on plants.", question: "How do butterflies taste their food?", answers: ["With their tongue", "With their antennae", "With their feet", "With their wings"], correct: 2 },
-      { fact: "The shortest war in history lasted only 38 minutes! It was between Britain and Zanzibar in 1896.", question: "How long was the shortest war in history?", answers: ["38 minutes", "2 hours", "1 day", "1 week"], correct: 0 },
-      { fact: "Cows have best friends! Studies show cows get stressed when separated from their closest pals.", question: "What happens when cows are separated from their best friends?", answers: ["They sleep more", "They eat more", "They get stressed", "They run away"], correct: 2 },
-      { fact: "A day on Venus is longer than a year on Venus! It takes 243 Earth days to rotate once, but only 225 days to orbit the sun.", question: "Is a day on Venus longer or shorter than a year on Venus?", answers: ["Shorter", "Longer", "The same", "Venus has no days"], correct: 1 }
+      // Art and creativity facts
+      { fact: "The Mona Lisa has no eyebrows! It was fashionable in Renaissance Italy to shave them off.", question: "What is missing from the Mona Lisa's face?", answers: ["Eyelashes", "Eyebrows", "Freckles", "Earrings"], correct: 1 },
+      { fact: "Crayola makes nearly 3 billion crayons every year! That's enough to circle the Earth six times if laid end to end.", question: "How many times could Crayola's yearly crayons circle Earth?", answers: ["Two times", "Four times", "Six times", "Ten times"], correct: 2 },
+      { fact: "Vincent van Gogh only sold one painting during his lifetime. Now his paintings sell for millions of dollars!", question: "How many paintings did Van Gogh sell while alive?", answers: ["None", "One", "Ten", "Fifty"], correct: 1 },
+      { fact: "The color orange was named after the fruit, not the other way around! Before oranges came to Europe, the color was called 'red-yellow.'", question: "What was the color orange called before?", answers: ["Sunset", "Red-yellow", "Amber", "Golden"], correct: 1 },
+      { fact: "Owls cannot move their eyeballs. Instead, they can rotate their heads up to 270 degrees to look around!", question: "How far can owls rotate their heads?", answers: ["90 degrees", "180 degrees", "270 degrees", "360 degrees"], correct: 2 },
+      { fact: "J.K. Rowling wrote the first Harry Potter book in cafes while her baby daughter slept beside her.", question: "Where did J.K. Rowling write the first Harry Potter book?", answers: ["At home", "In cafes", "At a library", "At school"], correct: 1 },
+      { fact: "The shortest complete sentence in English is 'I am.' It has a subject and a verb!", question: "What is the shortest complete sentence in English?", answers: ["Go", "I am", "Hi", "No"], correct: 1 },
+      { fact: "A group of owls is called a 'parliament.' This might be because owls look so wise and serious!", question: "What is a group of owls called?", answers: ["A flock", "A parliament", "A family", "A colony"], correct: 1 },
+      { fact: "The dot over the letters 'i' and 'j' is called a tittle. It's one of the smallest parts of our alphabet!", question: "What is the dot over the letter 'i' called?", answers: ["A speck", "A tittle", "A dot point", "A marking"], correct: 1 },
+      { fact: "Cats have been kept as pets for over 4,000 years. Ancient Egyptians even worshipped them as gods!", question: "How long have cats been kept as pets?", answers: ["1,000 years", "2,000 years", "4,000 years", "10,000 years"], correct: 2 },
+      { fact: "Shakespeare invented over 1,700 words we still use today, including 'bedroom,' 'lonely,' and 'generous.'", question: "About how many words did Shakespeare invent?", answers: ["100 words", "500 words", "1,700 words", "5,000 words"], correct: 2 },
+      { fact: "Hummingbirds are the only birds that can fly backwards. Their wings beat up to 80 times per second!", question: "How many times can a hummingbird's wings beat per second?", answers: ["20 times", "40 times", "80 times", "200 times"], correct: 2 },
+      { fact: "The Harry Potter books have been translated into over 80 languages, including Latin and Ancient Greek!", question: "Into how many languages have Harry Potter books been translated?", answers: ["30 languages", "50 languages", "Over 80 languages", "Over 200 languages"], correct: 2 },
+      { fact: "Octopuses have blue blood! The copper in their blood turns blue when it carries oxygen.", question: "What color is an octopus's blood?", answers: ["Red", "Green", "Blue", "Purple"], correct: 2 },
+      { fact: "The word 'doodle' comes from a German word meaning 'foolish person.' Now it just means casual drawings!", question: "What language does the word 'doodle' come from?", answers: ["French", "Spanish", "German", "Italian"], correct: 2 },
+      { fact: "Snails can sleep for up to three years! They do this when the weather isn't right for them.", question: "How long can snails sleep?", answers: ["Three days", "Three weeks", "Three months", "Three years"], correct: 3 },
+      { fact: "The first colored pencils were invented in 1834. Before that, artists used charcoal and chalk for drawing!", question: "When were colored pencils invented?", answers: ["1734", "1834", "1934", "1974"], correct: 1 },
+      { fact: "Dolphins give each other names! They use unique whistles to call specific friends in their pod.", question: "How do dolphins call their friends?", answers: ["By touching", "With unique whistles", "By splashing", "With clicks"], correct: 1 },
+      { fact: "The longest English word without repeating letters is 'uncopyrightable' with 15 letters!", question: "How many letters are in 'uncopyrightable'?", answers: ["12 letters", "15 letters", "18 letters", "20 letters"], correct: 1 },
+      { fact: "A jiffy is an actual unit of time! It equals one hundredth of a second.", question: "How long is a jiffy?", answers: ["One second", "One tenth of a second", "One hundredth of a second", "One minute"], correct: 2 },
+      { fact: "The Hogwarts castle in the Harry Potter films used over 2,500 fiber optic lights to create the twinkling windows.", question: "How many fiber optic lights were used for Hogwarts windows?", answers: ["500", "1,000", "2,500", "5,000"], correct: 2 },
+      { fact: "Elephants are the only animals that cannot jump. Their legs are designed for strength, not bouncing!", question: "What can elephants not do?", answers: ["Swim", "Run", "Jump", "Walk backwards"], correct: 2 },
+      { fact: "The pencil was invented before the eraser. For 200 years, people used bread crumbs to erase pencil marks!", question: "What did people use to erase before erasers were invented?", answers: ["Water", "Bread crumbs", "Sand", "Cloth"], correct: 1 },
+      { fact: "A cloud can weigh more than a million pounds! They float because the water drops are spread out over a huge area.", question: "How much can a cloud weigh?", answers: ["100 pounds", "1,000 pounds", "Over a million pounds", "10 pounds"], correct: 2 },
+      { fact: "Dr. Seuss wrote 'Green Eggs and Ham' using only 50 different words. It was a bet with his publisher!", question: "How many different words are in Green Eggs and Ham?", answers: ["25 words", "50 words", "100 words", "200 words"], correct: 1 },
+      { fact: "Starfish don't have brains! Instead, they have a nervous system spread throughout their arms.", question: "What do starfish not have?", answers: ["Hearts", "Brains", "Stomachs", "Eyes"], correct: 1 },
+      { fact: "The original Harry Potter manuscript was rejected by 12 publishers before being accepted!", question: "How many publishers rejected Harry Potter?", answers: ["3 publishers", "7 publishers", "12 publishers", "20 publishers"], correct: 2 },
+      { fact: "Bananas glow blue under black lights! This is because of the way they ripen.", question: "What color do bananas glow under black light?", answers: ["Yellow", "Green", "Blue", "Purple"], correct: 2 },
+      { fact: "The average pencil can draw a line 35 miles long or write about 45,000 words!", question: "How many words can an average pencil write?", answers: ["5,000 words", "15,000 words", "45,000 words", "100,000 words"], correct: 2 },
+      { fact: "Koalas sleep up to 22 hours a day! Eucalyptus leaves don't give them much energy.", question: "How many hours a day do koalas sleep?", answers: ["10 hours", "15 hours", "22 hours", "8 hours"], correct: 2 },
+      { fact: "The original name for butterfly was 'flutterby.' Someone mixed up the sounds long ago!", question: "What was butterfly originally called?", answers: ["Flyby", "Flutterby", "Flutter wing", "Butterflight"], correct: 1 },
+      { fact: "A narwhal's horn is actually a giant tooth! It can grow up to 10 feet long.", question: "What is a narwhal's horn really?", answers: ["A bone", "A tooth", "A horn", "Cartilage"], correct: 1 },
+      { fact: "The first crayons were made from charcoal and oil. Modern wax crayons weren't invented until 1903!", question: "When were modern wax crayons invented?", answers: ["1803", "1853", "1903", "1953"], correct: 2 },
+      { fact: "Frogs cannot swallow with their eyes open! They use their eyes to help push food down their throats.", question: "What can frogs not do while swallowing?", answers: ["Breathe", "Jump", "Keep eyes open", "Make sounds"], correct: 2 },
+      { fact: "The Hogwarts Express number 5972 is a real train! It was renamed from 'Olton Hall' for the movies.", question: "What was the Hogwarts Express train originally named?", answers: ["Platform Nine", "Olton Hall", "London Special", "Magic Rail"], correct: 1 },
+      { fact: "Honey never spoils! Archaeologists have found 3,000-year-old honey in Egyptian tombs that was still good to eat.", question: "How old was edible honey found in Egyptian tombs?", answers: ["100 years", "500 years", "3,000 years", "10,000 years"], correct: 2 },
+      { fact: "Before erasers, writers used wax tablets they could smooth over and reuse many times.", question: "What did writers use before paper that could be reused?", answers: ["Stone tablets", "Wax tablets", "Clay tablets", "Wood boards"], correct: 1 },
+      { fact: "Seahorses are the only animals where the father gives birth to babies! He carries them in a special pouch.", question: "What is special about seahorse fathers?", answers: ["They find food", "They give birth", "They build nests", "They teach swimming"], correct: 1 },
+      { fact: "There are more possible combinations of moves in chess than atoms in the known universe!", question: "What has more possibilities - chess moves or atoms in the universe?", answers: ["Atoms in universe", "Chess moves", "They are equal", "Neither"], correct: 1 },
+      { fact: "A bolt of lightning is five times hotter than the surface of the sun!", question: "How much hotter is lightning than the sun's surface?", answers: ["Two times", "Three times", "Five times", "Ten times"], correct: 2 },
+      { fact: "The word 'school' comes from the Greek word for 'free time.' Ancient Greeks spent their leisure learning!", question: "What Greek word does 'school' come from?", answers: ["Work", "Study", "Free time", "Building"], correct: 2 },
+      { fact: "Flamingos can only eat with their heads upside down! Their beaks are specially designed for it.", question: "How do flamingos eat?", answers: ["Standing tall", "With heads upside down", "While flying", "Underwater"], correct: 1 },
+      { fact: "The first book ever printed was the Gutenberg Bible in 1455. Before that, all books were written by hand!", question: "What was the first book ever printed?", answers: ["A cookbook", "A dictionary", "The Gutenberg Bible", "A history book"], correct: 2 },
+      { fact: "Wombat poop is cube-shaped! This helps it stay in place and mark their territory.", question: "What shape is wombat poop?", answers: ["Round", "Cube-shaped", "Oval", "Flat"], correct: 1 },
+      { fact: "A rainbow can only be seen when the sun is behind you. That's why you'll never reach the end of one!", question: "Where must the sun be for you to see a rainbow?", answers: ["In front of you", "Behind you", "Above you", "Below the horizon"], correct: 1 },
+      { fact: "Spiders' webs are stronger than steel of the same thickness! Scientists study them to make super-strong materials.", question: "What is stronger than steel of the same thickness?", answers: ["Hair", "Spider webs", "Paper", "Grass"], correct: 1 },
+      { fact: "The shortest war in history lasted only 38 minutes! It was between Britain and Zanzibar.", question: "How long was the shortest war?", answers: ["38 minutes", "2 hours", "1 day", "1 week"], correct: 0 },
+      { fact: "A day on Venus is longer than its year! Venus spins very slowly but orbits the sun quickly.", question: "Is a day on Venus longer or shorter than its year?", answers: ["Shorter", "Longer", "The same", "Venus has no days"], correct: 1 },
+      { fact: "Your nose can remember 50,000 different scents! That's why certain smells bring back strong memories.", question: "How many scents can your nose remember?", answers: ["1,000 scents", "10,000 scents", "50,000 scents", "100,000 scents"], correct: 2 }
     ];
 
     const vocabularyWords = [
-      { word: "Perseverance", definition: "Continuing to try even when things are difficult", sentence: "Her _____ helped her finish the marathon.", answers: ["Perseverance", "Excitement", "Happiness", "Boredom"], correct: 0 },
-      { word: "Magnificent", definition: "Extremely beautiful or impressive", sentence: "The sunset over the ocean was _____.", answers: ["Tiny", "Magnificent", "Quick", "Quiet"], correct: 1 },
-      { word: "Curious", definition: "Eager to learn or know something", sentence: "The _____ cat explored every corner of the house.", answers: ["Sleepy", "Angry", "Curious", "Hungry"], correct: 2 },
-      { word: "Courage", definition: "The ability to do something that frightens you", sentence: "It took great _____ to speak in front of the whole school.", answers: ["Silence", "Speed", "Courage", "Height"], correct: 2 },
-      { word: "Brilliant", definition: "Exceptionally clever or talented", sentence: "She had a _____ idea to solve the puzzle.", answers: ["Boring", "Brilliant", "Broken", "Basic"], correct: 1 },
-      { word: "Generous", definition: "Willing to give more than expected", sentence: "My _____ neighbor always shares her garden vegetables.", answers: ["Generous", "Grumpy", "Quiet", "Tall"], correct: 0 },
-      { word: "Determined", definition: "Having made a firm decision and refusing to give up", sentence: "The _____ climber reached the top of the mountain.", answers: ["Tired", "Lost", "Determined", "Cold"], correct: 2 },
-      { word: "Extraordinary", definition: "Very unusual or remarkable", sentence: "The magician performed an _____ trick.", answers: ["Ordinary", "Extraordinary", "Tiny", "Simple"], correct: 1 }
+      // Creative and magical words
+      { word: "Whimsical", definition: "Playfully unusual or fanciful", sentence: "The artist painted a _____ forest with purple trees and singing flowers.", answers: ["Boring", "Whimsical", "Dark", "Simple"], correct: 1 },
+      { word: "Enchanted", definition: "Under a magical spell or delightfully charming", sentence: "The _____ garden had flowers that glowed at night.", answers: ["Empty", "Enchanted", "Broken", "Regular"], correct: 1 },
+      { word: "Illuminate", definition: "To light up or make clear", sentence: "Candles _____ the castle hallway with a warm glow.", answers: ["Darken", "Close", "Illuminate", "Hide"], correct: 2 },
+      { word: "Mystical", definition: "Having magical or supernatural qualities", sentence: "The old forest had a _____ feeling, as if fairies might appear.", answers: ["Boring", "Ordinary", "Mystical", "Empty"], correct: 2 },
+      { word: "Courageous", definition: "Brave and not afraid to face danger", sentence: "The _____ knight faced the dragon without fear.", answers: ["Scared", "Courageous", "Tired", "Hungry"], correct: 1 },
+      { word: "Peculiar", definition: "Strange or unusual in an interesting way", sentence: "The shop sold _____ items like singing teapots and invisible ink.", answers: ["Peculiar", "Common", "Broken", "Heavy"], correct: 0 },
+      { word: "Vibrant", definition: "Full of energy and bright colors", sentence: "Her painting used _____ colors that seemed to dance on the canvas.", answers: ["Dull", "Faded", "Vibrant", "Gray"], correct: 2 },
+      { word: "Transform", definition: "To change completely in appearance or form", sentence: "The caterpillar will _____ into a beautiful butterfly.", answers: ["Stay", "Transform", "Sleep", "Hide"], correct: 1 },
+      { word: "Magnificent", definition: "Extremely beautiful or impressive", sentence: "The _____ castle had a hundred towers reaching toward the sky.", answers: ["Tiny", "Broken", "Magnificent", "Simple"], correct: 2 },
+      { word: "Curious", definition: "Eager to learn or know something new", sentence: "The _____ student asked questions about everything.", answers: ["Bored", "Tired", "Curious", "Quiet"], correct: 2 },
+      { word: "Flourish", definition: "To grow or develop successfully", sentence: "With practice, her art skills began to _____.", answers: ["Disappear", "Shrink", "Flourish", "Stop"], correct: 2 },
+      { word: "Legendary", definition: "Famous and admired, often talked about in stories", sentence: "The _____ wizard was known throughout the kingdom.", answers: ["Unknown", "Legendary", "Forgotten", "New"], correct: 1 },
+      { word: "Intricate", definition: "Very detailed and complicated", sentence: "She drew an _____ pattern with hundreds of tiny shapes.", answers: ["Simple", "Plain", "Intricate", "Empty"], correct: 2 },
+      { word: "Persevere", definition: "To keep trying even when things are difficult", sentence: "She decided to _____ with her drawing until it was perfect.", answers: ["Quit", "Persevere", "Sleep", "Forget"], correct: 1 },
+      { word: "Spectacular", definition: "Beautiful in a dramatic and impressive way", sentence: "The fireworks show was absolutely _____!", answers: ["Boring", "Quiet", "Spectacular", "Small"], correct: 2 },
+      { word: "Conjure", definition: "To make something appear as if by magic", sentence: "The wizard could _____ flames from thin air.", answers: ["Hide", "Conjure", "Lose", "Break"], correct: 1 },
+      { word: "Radiant", definition: "Shining brightly or showing great joy", sentence: "Her smile was _____ when she finished her masterpiece.", answers: ["Sad", "Radiant", "Dark", "Tired"], correct: 1 },
+      { word: "Wondrous", definition: "Inspiring a feeling of wonder and amazement", sentence: "The _____ display of northern lights filled the sky.", answers: ["Boring", "Wondrous", "Gray", "Empty"], correct: 1 },
+      { word: "Diligent", definition: "Working hard and carefully", sentence: "The _____ artist spent months perfecting every detail.", answers: ["Lazy", "Careless", "Diligent", "Quick"], correct: 2 },
+      { word: "Majestic", definition: "Having grandeur and dignity", sentence: "The _____ owl spread its wings and soared over the forest.", answers: ["Tiny", "Majestic", "Clumsy", "Scared"], correct: 1 },
+      { word: "Imaginative", definition: "Having creative or original ideas", sentence: "Her _____ stories always featured impossible adventures.", answers: ["Boring", "Imaginative", "Copied", "Simple"], correct: 1 },
+      { word: "Serene", definition: "Calm, peaceful and untroubled", sentence: "The lake was _____ at dawn, like a perfect mirror.", answers: ["Stormy", "Noisy", "Serene", "Rough"], correct: 2 },
+      { word: "Astonish", definition: "To surprise someone very much", sentence: "Her talent never failed to _____ her teachers.", answers: ["Bore", "Astonish", "Annoy", "Confuse"], correct: 1 },
+      { word: "Brilliant", definition: "Exceptionally clever or talented", sentence: "She had a _____ idea for her next painting.", answers: ["Terrible", "Brilliant", "Dull", "Boring"], correct: 1 },
+      { word: "Captivate", definition: "To attract and hold someone's attention", sentence: "Her storytelling could _____ any audience.", answers: ["Bore", "Captivate", "Confuse", "Annoy"], correct: 1 },
+      { word: "Dazzling", definition: "Extremely bright or impressive", sentence: "The _____ colors of the sunset took her breath away.", answers: ["Dull", "Gray", "Dazzling", "Faded"], correct: 2 },
+      { word: "Ethereal", definition: "Extremely delicate and light, almost heavenly", sentence: "The _____ music seemed to float through the air.", answers: ["Heavy", "Loud", "Ethereal", "Harsh"], correct: 2 },
+      { word: "Graceful", definition: "Moving in a smooth and elegant way", sentence: "The ballerina's _____ movements told a beautiful story.", answers: ["Clumsy", "Graceful", "Awkward", "Stiff"], correct: 1 },
+      { word: "Inspire", definition: "To fill someone with the desire to create", sentence: "Nature always _____ her to paint landscapes.", answers: ["Bored", "Tire", "Inspire", "Stop"], correct: 2 },
+      { word: "Luminous", definition: "Giving off light or glowing", sentence: "The _____ moon lit up the entire garden.", answers: ["Dark", "Luminous", "Hidden", "Small"], correct: 1 },
+      { word: "Masterpiece", definition: "An outstanding work of art or skill", sentence: "After weeks of work, she finally completed her _____.", answers: ["Mistake", "Masterpiece", "Mess", "Doodle"], correct: 1 },
+      { word: "Noble", definition: "Having high moral qualities and courage", sentence: "The _____ knight always helped those in need.", answers: ["Mean", "Noble", "Selfish", "Cruel"], correct: 1 },
+      { word: "Origami", definition: "The Japanese art of folding paper into shapes", sentence: "She learned _____ and made beautiful paper cranes.", answers: ["Painting", "Origami", "Cooking", "Dancing"], correct: 1 },
+      { word: "Palette", definition: "A board for mixing paints, or a range of colors", sentence: "The artist's _____ was covered with blues and greens.", answers: ["Brush", "Palette", "Canvas", "Frame"], correct: 1 },
+      { word: "Quest", definition: "A long search for something important", sentence: "The heroes went on a _____ to find the magic crystal.", answers: ["Nap", "Quest", "Party", "Vacation"], correct: 1 },
+      { word: "Remarkable", definition: "Worthy of attention because it's unusual", sentence: "Her artistic progress was truly _____.", answers: ["Boring", "Normal", "Remarkable", "Expected"], correct: 2 },
+      { word: "Spellbound", definition: "Completely fascinated, as if under a spell", sentence: "The audience sat _____ during her performance.", answers: ["Bored", "Spellbound", "Asleep", "Confused"], correct: 1 },
+      { word: "Tranquil", definition: "Free from disturbance, calm", sentence: "The _____ forest was perfect for sketching nature.", answers: ["Noisy", "Busy", "Tranquil", "Crowded"], correct: 2 },
+      { word: "Unique", definition: "Being the only one of its kind", sentence: "Every snowflake is _____, with its own special pattern.", answers: ["Common", "Same", "Unique", "Boring"], correct: 2 },
+      { word: "Venture", definition: "A risky journey or undertaking", sentence: "They decided to _____ into the mysterious cave.", answers: ["Avoid", "Venture", "Fear", "Ignore"], correct: 1 },
+      { word: "Whimsy", definition: "Playfully quaint or fanciful behavior", sentence: "Her drawings were full of _____ and joy.", answers: ["Sadness", "Whimsy", "Anger", "Boredom"], correct: 1 },
+      { word: "Exquisite", definition: "Extremely beautiful and delicate", sentence: "The _____ details in her illustration amazed everyone.", answers: ["Ugly", "Rough", "Exquisite", "Simple"], correct: 2 },
+      { word: "Yearn", definition: "To have a strong wish for something", sentence: "She would _____ to visit the enchanted library.", answers: ["Hate", "Yearn", "Fear", "Ignore"], correct: 1 },
+      { word: "Zeal", definition: "Great energy and enthusiasm", sentence: "She approached every art project with great _____.", answers: ["Laziness", "Zeal", "Boredom", "Fear"], correct: 1 },
+      { word: "Alchemy", definition: "A magical process of transformation", sentence: "The wizard practiced _____, turning lead into gold.", answers: ["Cooking", "Alchemy", "Reading", "Sleeping"], correct: 1 },
+      { word: "Chronicle", definition: "A written record of events in order of time", sentence: "She kept a _____ of all her adventures in her journal.", answers: ["Secret", "Chronicle", "Mess", "Trick"], correct: 1 },
+      { word: "Devoted", definition: "Very loving and loyal", sentence: "The _____ owl never left its wizard's side.", answers: ["Mean", "Devoted", "Lost", "Wild"], correct: 1 },
+      { word: "Eloquent", definition: "Expressing ideas clearly and beautifully", sentence: "Her _____ writing moved readers to tears.", answers: ["Messy", "Confusing", "Eloquent", "Boring"], correct: 2 },
+      { word: "Fable", definition: "A short story that teaches a lesson", sentence: "The _____ about the tortoise and hare teaches patience.", answers: ["Recipe", "Fable", "List", "Map"], correct: 1 },
+      { word: "Glimmer", definition: "A faint or unsteady light", sentence: "A _____ of hope shone in the dark forest.", answers: ["Darkness", "Glimmer", "Shadow", "Nothing"], correct: 1 }
     ];
 
     const encouragementMessages = {
       correct: [
-        "Fantastic job! You're amazing! 🌟",
-        "You got it! Your brain is on fire! 🔥",
-        "Perfect! You're a superstar! ⭐",
-        "Wonderful! Keep shining! ✨",
-        "Brilliant work! You're unstoppable! 💪",
-        "Yes! You're doing incredible! 🎉",
-        "Amazing! You should be so proud! 🏆",
-        "Nailed it! You're a genius! 🧠"
+        "10 points to your house! 🏆",
+        "Brilliant work, young witch! ⚡",
+        "You're magical! ✨",
+        "Outstanding! Professor McGonagall would be proud! 🐱",
+        "Expecto Perfectum! You nailed it! 🦌",
+        "Your brain is more powerful than Felix Felicis! 🍀",
+        "Hermione-level genius! 📚",
+        "You're a natural! Like magic! 🪄",
+        "Fantastic! The Sorting Hat was right about you! 🎩",
+        "You're on fire! (But in a good way, not like a dragon!) 🐉"
       ],
       incorrect: [
-        "Almost! You're so close - try again! 💪",
-        "Not quite, but I believe in you! Keep going! 🌈",
-        "That's okay! Learning means making mistakes. You've got this! ⭐",
-        "Oops! But guess what? You're getting smarter just by trying! 🧠",
-        "So close! Take another look - you can do this! 💫",
-        "Don't give up! Every try makes you stronger! 🦋"
+        "Almost! Even Dumbledore had to practice! 🧙",
+        "Not quite, but brave witches keep trying! 💪",
+        "Oops! But remember - every master was once a beginner! 🌟",
+        "Keep going! Courage is doing it even when it's hard! ⚡",
+        "That's okay! Learning is its own kind of magic! ✨",
+        "Try again! You've got the heart of a Gryffindor! 🦁"
       ],
       streak: [
-        "3 in a row! You're on fire! 🔥",
-        "5 in a row! Incredible streak! 🌟",
-        "10 in a row! You're absolutely AMAZING! 🏆",
-        "Wow! You just keep getting better! 🚀"
+        "3 in a row! You're casting spells perfectly! 🪄",
+        "5 in a row! Your magic is getting stronger! ⚡",
+        "10 in a row! You're ready for N.E.W.T. level! 🏆",
+        "Incredible streak! The wizarding world celebrates you! 🎉"
       ]
     };
 
