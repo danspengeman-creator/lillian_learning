@@ -967,6 +967,170 @@
       color: white;
     }
 
+    .vocab-words-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .vocab-word-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      background: linear-gradient(135deg, #F0EBFF 0%, #E8E0FF 100%);
+      padding: 0.5rem 1rem;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      color: var(--lilac-dark);
+      border: 1px solid var(--lilac-light);
+    }
+
+    .vocab-word-badge .word-def {
+      font-size: 0.75rem;
+      color: var(--text-light);
+      margin-left: 0.3rem;
+    }
+
+    .no-words-yet {
+      color: var(--text-light);
+      font-style: italic;
+    }
+
+    /* Word highlighting during speech */
+    .highlight-word {
+      background: var(--gold-soft);
+      border-radius: 4px;
+      padding: 0 2px;
+      transition: background 0.2s ease;
+    }
+
+    .speakable-text {
+      line-height: 1.8;
+    }
+
+    .speakable-text .word {
+      transition: all 0.15s ease;
+    }
+
+    .speakable-text .word.speaking {
+      background: linear-gradient(135deg, var(--gold-soft) 0%, #FFE8CC 100%);
+      border-radius: 4px;
+      padding: 2px 4px;
+      margin: 0 -2px;
+    }
+
+    /* Math sub-sections */
+    .math-menu {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .math-type-card {
+      background: white;
+      border-radius: 16px;
+      padding: 1.5rem;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      border: 2px solid transparent;
+    }
+
+    .math-type-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    }
+
+    .math-type-card.addition { border-color: var(--mint); }
+    .math-type-card.subtraction { border-color: var(--coral); }
+    .math-type-card.multiplication { border-color: var(--lilac); }
+    .math-type-card.division { border-color: var(--gold); }
+
+    .math-type-icon {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .math-type-name {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.2rem;
+      color: var(--text);
+      margin-bottom: 0.3rem;
+    }
+
+    .math-type-desc {
+      font-size: 0.85rem;
+      color: var(--text-light);
+    }
+
+    .math-type-progress {
+      margin-top: 0.8rem;
+      height: 6px;
+      background: #F0F0F0;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .math-type-progress-fill {
+      height: 100%;
+      border-radius: 10px;
+      transition: width 0.3s ease;
+    }
+
+    .math-type-card.addition .math-type-progress-fill { background: var(--mint); }
+    .math-type-card.subtraction .math-type-progress-fill { background: var(--coral); }
+    .math-type-card.multiplication .math-type-progress-fill { background: var(--lilac); }
+    .math-type-card.division .math-type-progress-fill { background: var(--gold); }
+
+    /* Math explanation/tutorial */
+    .math-tutorial {
+      background: linear-gradient(135deg, #F0FBFF 0%, #E8F5FF 100%);
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      border-left: 4px solid var(--sky);
+    }
+
+    .tutorial-title {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.1rem;
+      color: var(--text);
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .tutorial-content {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--text);
+    }
+
+    .tutorial-example {
+      background: white;
+      border-radius: 10px;
+      padding: 1rem;
+      margin-top: 1rem;
+      font-family: 'Fredoka', sans-serif;
+      text-align: center;
+    }
+
+    .tutorial-example-problem {
+      font-size: 1.3rem;
+      color: var(--lilac-dark);
+      margin-bottom: 0.5rem;
+    }
+
+    .tutorial-example-explanation {
+      font-size: 0.95rem;
+      color: var(--text-light);
+      font-family: 'Quicksand', sans-serif;
+    }
+
     .insights-box {
       background: linear-gradient(135deg, #E8F5E9 0%, #F1F8E9 100%);
       padding: 1rem;
@@ -1295,6 +1459,13 @@
         </div>
       </div>
 
+      <div class="dashboard-section">
+        <h3>📝 Vocabulary Words Learned</h3>
+        <div class="vocab-words-list" id="vocabWordsList">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
       <div class="reset-section">
         <p style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 1rem;">Need to start fresh? This will reset all progress.</p>
         <button class="reset-btn" onclick="resetProgress()">🔄 Reset All Progress</button>
@@ -1591,11 +1762,19 @@
         funfacts: { correct: 0, attempted: 0 },
         vocabulary: { correct: 0, attempted: 0 }
       },
+      mathTypes: {
+        addition: { correct: 0, attempted: 0 },
+        subtraction: { correct: 0, attempted: 0 },
+        multiplication: { correct: 0, attempted: 0 },
+        division: { correct: 0, attempted: 0 }
+      },
+      vocabWordsLearned: [],
       achievements: achievements.map(a => ({ ...a })),
       subjectsTried: []
     };
 
     let currentSubject = null;
+    let currentMathType = null;
     let currentQuestionIndex = 0;
     let selectedAnswer = null;
     let questionAnswered = false;
@@ -1692,6 +1871,7 @@
       currentQuestionIndex = 0;
       selectedAnswer = null;
       questionAnswered = false;
+      currentMathType = null;
 
       // Track subjects tried
       if (!state.subjectsTried.includes(subject)) {
@@ -1702,6 +1882,50 @@
       document.getElementById('homeScreen').style.display = 'none';
       document.getElementById('activityScreen').classList.add('active');
 
+      // Show math menu for math subject
+      if (subject === 'math') {
+        showMathMenu();
+      } else {
+        loadQuestion();
+      }
+    }
+
+    function showMathMenu() {
+      const container = document.getElementById('questionContainer');
+      const types = [
+        { type: 'addition', icon: '➕', name: 'Addition', desc: 'Put numbers together!', color: 'mint' },
+        { type: 'subtraction', icon: '➖', name: 'Subtraction', desc: 'Take numbers away!', color: 'coral' },
+        { type: 'multiplication', icon: '✖️', name: 'Multiplication', desc: 'Groups of numbers!', color: 'lilac' },
+        { type: 'division', icon: '➗', name: 'Division', desc: 'Share equally!', color: 'gold' }
+      ];
+
+      container.innerHTML = `
+        <div class="question-card">
+          <h2 style="font-family: 'Fredoka', sans-serif; text-align: center; color: var(--text); margin-bottom: 1.5rem;">
+            🔢 Choose Your Math Adventure!
+          </h2>
+          <div class="math-menu">
+            ${types.map(t => {
+              const progress = state.mathTypes[t.type] ? Math.min(100, state.mathTypes[t.type].correct * 20) : 0;
+              return `
+                <div class="math-type-card ${t.type}" onclick="startMathType('${t.type}')">
+                  <div class="math-type-icon">${t.icon}</div>
+                  <div class="math-type-name">${t.name}</div>
+                  <div class="math-type-desc">${t.desc}</div>
+                  <div class="math-type-progress">
+                    <div class="math-type-progress-fill" style="width: ${progress}%"></div>
+                  </div>
+                </div>
+              `;
+            }).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    function startMathType(type) {
+      currentMathType = type;
+      currentQuestionIndex = 0;
       loadQuestion();
     }
 
@@ -1709,6 +1933,7 @@
       document.getElementById('homeScreen').style.display = 'block';
       document.getElementById('activityScreen').classList.remove('active');
       state.currentStreak = 0; // Reset streak when leaving
+      currentMathType = null;
       updateUI();
     }
 
@@ -1726,9 +1951,10 @@
           container.innerHTML = renderReadingQuestion(q, currentQuestionIndex + 1);
           break;
         case 'math':
-          questions = mathQuestions;
+          // Filter by math type
+          questions = mathQuestions.filter(mq => mq.type === currentMathType);
           q = questions[currentQuestionIndex % questions.length];
-          container.innerHTML = renderMathQuestion(q, currentQuestionIndex + 1);
+          container.innerHTML = renderMathQuestion(q, currentQuestionIndex + 1, currentMathType);
           break;
         case 'funfacts':
           questions = funFacts;
@@ -1746,7 +1972,43 @@
       questionAnswered = false;
     }
 
+    // Math tutorials for each type
+    const mathTutorials = {
+      addition: {
+        title: "➕ Adding Numbers Together",
+        content: "Addition means putting numbers together to get a bigger number! Think of it like collecting things.",
+        example: "5 + 3 = 8",
+        explanation: "Imagine you have 5 apples 🍎🍎🍎🍎🍎 and get 3 more 🍎🍎🍎. Count them all up: 1, 2, 3, 4, 5, 6, 7, 8!"
+      },
+      subtraction: {
+        title: "➖ Taking Numbers Away",
+        content: "Subtraction means taking some away from what you have. Start with the big number and count backwards!",
+        example: "7 - 4 = 3",
+        explanation: "Start with 7 fingers up ✋✌️. Put down 4 fingers. How many are still up? 3! 🎉"
+      },
+      multiplication: {
+        title: "✖️ Groups of Numbers",
+        content: "Multiplication is a fast way to add the same number many times! Think of it as making equal groups.",
+        example: "4 × 3 = 12",
+        explanation: "Imagine 4 baskets with 3 cookies each: 🍪🍪🍪 🍪🍪🍪 🍪🍪🍪 🍪🍪🍪. That's 3+3+3+3 = 12 cookies!"
+      },
+      division: {
+        title: "➗ Sharing Equally",
+        content: "Division means splitting things into equal groups. It's like sharing fairly with friends!",
+        example: "12 ÷ 4 = 3",
+        explanation: "You have 12 stickers to share with 4 friends equally. Each friend gets 3 stickers! 🌟🌟🌟"
+      }
+    };
+
+    function wrapWordsInSpans(text) {
+      return text.split(/(\s+)/).map((part, i) => {
+        if (part.match(/^\s+$/)) return part; // Keep whitespace as-is
+        return `<span class="word">${part}</span>`;
+      }).join('');
+    }
+
     function renderReadingQuestion(q, num) {
+      const wrappedPassage = wrapWordsInSpans(q.passage);
       return `
         <div class="question-card">
           <div class="question-header">
@@ -1756,13 +2018,13 @@
           <div class="passage">
             <div class="passage-header">
               <span class="passage-label">📖 Read the story</span>
-              <button class="speak-btn" onclick="speakText(\`${q.passage.replace(/`/g, "'")}\`)" title="Listen to the story">
+              <button class="speak-btn" onclick="speakWithHighlight(\`${q.passage.replace(/`/g, "'")}\`, 'passageText')" title="Listen to the story">
                 <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
                 </svg>
               </button>
             </div>
-            ${q.passage}
+            <div id="passageText" class="speakable-text">${wrappedPassage}</div>
           </div>
           <div class="question-text">${q.question}</div>
           <div class="answers-grid">
@@ -1776,7 +2038,7 @@
       `;
     }
 
-    function renderMathQuestion(q, num) {
+    function renderMathQuestion(q, num, mathType) {
       // Convert math symbols to speakable text
       const speakableProblem = q.problem
         .replace('×', ' times ')
@@ -1784,12 +2046,25 @@
         .replace('+', ' plus ')
         .replace('-', ' minus ');
       
+      const tutorial = mathTutorials[mathType];
+      const showTutorial = currentQuestionIndex === 0; // Show tutorial on first question
+      
       return `
         <div class="question-card">
           <div class="question-header">
-            <span class="question-number">Problem ${num}</span>
+            <span class="question-number">${tutorial.title.split(' ')[0]} Problem ${num}</span>
             <span class="question-points">+10 ⭐</span>
           </div>
+          ${showTutorial ? `
+            <div class="math-tutorial">
+              <div class="tutorial-title">💡 How to solve ${mathType} problems:</div>
+              <div class="tutorial-content">${tutorial.content}</div>
+              <div class="tutorial-example">
+                <div class="tutorial-example-problem">${tutorial.example}</div>
+                <div class="tutorial-example-explanation">${tutorial.explanation}</div>
+              </div>
+            </div>
+          ` : ''}
           <div class="math-problem-container">
             <div class="math-problem">${q.problem} = ?</div>
             <button class="speak-btn" onclick="speakText('What is ${speakableProblem}?')" title="Hear the problem">
@@ -1822,6 +2097,7 @@
     }
 
     function renderFunFactQuestion(q, num) {
+      const wrappedFact = wrapWordsInSpans(q.fact);
       return `
         <div class="question-card">
           <div class="question-header">
@@ -1831,13 +2107,13 @@
           <div class="fun-fact-display">
             <div class="passage-header">
               <span class="fun-fact-label">✨ Did You Know?</span>
-              <button class="speak-btn" onclick="speakText(\`${q.fact.replace(/`/g, "'")}\`)" title="Hear the fun fact">
+              <button class="speak-btn" onclick="speakWithHighlight(\`${q.fact.replace(/`/g, "'")}\`, 'funFactText')" title="Hear the fun fact">
                 <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
                 </svg>
               </button>
             </div>
-            <div class="fun-fact-text">${q.fact}</div>
+            <div id="funFactText" class="fun-fact-text speakable-text">${wrappedFact}</div>
           </div>
           <div class="question-text">${q.question}</div>
           <div class="answers-grid">
@@ -1988,11 +2264,34 @@
     function processAnswer(isCorrect) {
       state.subjects[currentSubject].attempted++;
       
+      // Track math type
+      if (currentSubject === 'math' && currentMathType) {
+        if (!state.mathTypes[currentMathType]) {
+          state.mathTypes[currentMathType] = { correct: 0, attempted: 0 };
+        }
+        state.mathTypes[currentMathType].attempted++;
+      }
+      
       if (isCorrect) {
         state.totalXP += 10;
         state.totalCorrect++;
         state.currentStreak++;
         state.subjects[currentSubject].correct++;
+
+        // Track math type correct
+        if (currentSubject === 'math' && currentMathType) {
+          state.mathTypes[currentMathType].correct++;
+        }
+
+        // Track vocabulary words learned
+        if (currentSubject === 'vocabulary') {
+          const questions = vocabularyWords;
+          const q = questions[currentQuestionIndex % questions.length];
+          if (!state.vocabWordsLearned) state.vocabWordsLearned = [];
+          if (!state.vocabWordsLearned.find(w => w.word === q.word)) {
+            state.vocabWordsLearned.push({ word: q.word, definition: q.definition });
+          }
+        }
 
         // Update day streak
         const today = new Date().toDateString();
@@ -2123,7 +2422,7 @@
     }
 
     // ==================== TEXT TO SPEECH ====================
-    function speakText(text) {
+    function speakText(text, elementId = null) {
       // Cancel any ongoing speech
       window.speechSynthesis.cancel();
       
@@ -2156,11 +2455,44 @@
       const activeBtn = event && event.currentTarget ? event.currentTarget : btns[0];
       if (activeBtn) {
         activeBtn.classList.add('speaking');
-        utterance.onend = () => activeBtn.classList.remove('speaking');
-        utterance.onerror = () => activeBtn.classList.remove('speaking');
+        utterance.onend = () => {
+          activeBtn.classList.remove('speaking');
+          // Clear all highlights when done
+          document.querySelectorAll('.word.speaking').forEach(w => w.classList.remove('speaking'));
+        };
+        utterance.onerror = () => {
+          activeBtn.classList.remove('speaking');
+          document.querySelectorAll('.word.speaking').forEach(w => w.classList.remove('speaking'));
+        };
+      }
+
+      // Word boundary highlighting
+      if (elementId) {
+        const container = document.getElementById(elementId);
+        if (container) {
+          const words = container.querySelectorAll('.word');
+          let wordIndex = 0;
+          
+          utterance.onboundary = (event) => {
+            if (event.name === 'word' && words.length > 0) {
+              // Remove previous highlight
+              words.forEach(w => w.classList.remove('speaking'));
+              // Add highlight to current word
+              if (wordIndex < words.length) {
+                words[wordIndex].classList.add('speaking');
+                wordIndex++;
+              }
+            }
+          };
+        }
       }
       
       window.speechSynthesis.speak(utterance);
+    }
+
+    // Speak with word highlighting
+    function speakWithHighlight(text, elementId) {
+      speakText(text, elementId);
     }
 
     // Special function for vocabulary - says word then definition
@@ -2243,6 +2575,19 @@
       ).join('');
 
       document.getElementById('achievementsList').innerHTML = achievementsHtml;
+
+      // Vocabulary words learned
+      const vocabList = document.getElementById('vocabWordsList');
+      if (state.vocabWordsLearned && state.vocabWordsLearned.length > 0) {
+        vocabList.innerHTML = state.vocabWordsLearned.map(w => 
+          `<span class="vocab-word-badge">
+            <strong>${w.word}</strong>
+            <span class="word-def">— ${w.definition}</span>
+          </span>`
+        ).join('');
+      } else {
+        vocabList.innerHTML = '<span class="no-words-yet">No vocabulary words learned yet. Try the Vocabulary section!</span>';
+      }
 
       // Insights
       const insights = generateInsights();
