@@ -2379,15 +2379,7 @@
       }
     };
 
-    function wrapWordsInSpans(text) {
-      return text.split(/(\s+)/).map((part, i) => {
-        if (part.match(/^\s+$/)) return part; // Keep whitespace as-is
-        return `<span class="word">${part}</span>`;
-      }).join('');
-    }
-
     function renderReadingQuestion(q, num) {
-      const wrappedPassage = wrapWordsInSpans(q.passage);
       return `
         <div class="question-card">
           <div class="question-header">
@@ -2397,13 +2389,13 @@
           <div class="passage">
             <div class="passage-header">
               <span class="passage-label">📖 Read the story</span>
-              <button class="speak-btn" onclick="speakWithHighlight(\`${q.passage.replace(/`/g, "'")}\`, 'passageText')" title="Listen to the story">
+              <button class="speak-btn" onclick="speakText(\`${q.passage.replace(/`/g, "'")}\`)" title="Listen to the story">
                 <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
                 </svg>
               </button>
             </div>
-            <div id="passageText" class="speakable-text">${wrappedPassage}</div>
+            <div class="passage-text">${q.passage}</div>
           </div>
           <div class="question-text">${q.question}</div>
           <div class="answers-grid">
@@ -2476,7 +2468,6 @@
     }
 
     function renderFunFactQuestion(q, num) {
-      const wrappedFact = wrapWordsInSpans(q.fact);
       return `
         <div class="question-card">
           <div class="question-header">
@@ -2486,13 +2477,13 @@
           <div class="fun-fact-display">
             <div class="passage-header">
               <span class="fun-fact-label">✨ Did You Know?</span>
-              <button class="speak-btn" onclick="speakWithHighlight(\`${q.fact.replace(/`/g, "'")}\`, 'funFactText')" title="Hear the fun fact">
+              <button class="speak-btn" onclick="speakText(\`${q.fact.replace(/`/g, "'")}\`)" title="Hear the fun fact">
                 <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
                 </svg>
               </button>
             </div>
-            <div id="funFactText" class="fun-fact-text speakable-text">${wrappedFact}</div>
+            <div class="fun-fact-text">${q.fact}</div>
           </div>
           <div class="question-text">${q.question}</div>
           <div class="answers-grid">
@@ -2801,7 +2792,7 @@
     }
 
     // ==================== TEXT TO SPEECH ====================
-    function speakText(text, elementId = null) {
+    function speakText(text) {
       // Cancel any ongoing speech
       window.speechSynthesis.cancel();
       
@@ -2830,59 +2821,21 @@
       const btns = document.querySelectorAll('.speak-btn');
       btns.forEach(btn => btn.classList.remove('speaking'));
       
-      // Find the button that was clicked (the one in the current view)
+      // Find the button that was clicked
       const activeBtn = event && event.currentTarget ? event.currentTarget : btns[0];
       if (activeBtn) {
         activeBtn.classList.add('speaking');
-        utterance.onend = () => {
-          activeBtn.classList.remove('speaking');
-          // Clear all highlights when done
-          document.querySelectorAll('.word.speaking').forEach(w => w.classList.remove('speaking'));
-        };
-        utterance.onerror = () => {
-          activeBtn.classList.remove('speaking');
-          document.querySelectorAll('.word.speaking').forEach(w => w.classList.remove('speaking'));
-        };
-      }
-
-      // Word boundary highlighting
-      if (elementId) {
-        const container = document.getElementById(elementId);
-        if (container) {
-          const words = container.querySelectorAll('.word');
-          let wordIndex = 0;
-          
-          utterance.onboundary = (event) => {
-            if (event.name === 'word' && words.length > 0) {
-              // Remove previous highlight
-              words.forEach(w => w.classList.remove('speaking'));
-              // Add highlight to current word
-              if (wordIndex < words.length) {
-                words[wordIndex].classList.add('speaking');
-                wordIndex++;
-              }
-            }
-          };
-        }
+        utterance.onend = () => activeBtn.classList.remove('speaking');
+        utterance.onerror = () => activeBtn.classList.remove('speaking');
       }
       
       window.speechSynthesis.speak(utterance);
-    }
-
-    // Speak with word highlighting
-    function speakWithHighlight(text, elementId) {
-      speakText(text, elementId);
     }
 
     // Special function for vocabulary - says word then definition
     function speakVocab(word, definition) {
       const fullText = word + ". The definition is: " + definition;
       speakText(fullText);
-    }
-
-    // Alias for vocabulary section
-    function speakWord(word) {
-      speakText(word);
     }
 
     // Preload voices (some browsers need this)
